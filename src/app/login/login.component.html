@@ -1,0 +1,61 @@
+<div class="container mt-3">
+  <div class="text-justify pt-5 px-5">
+    <h2 class="text-center titleLogin">Iniciar Sesión</h2>
+    <p class="descriptionEveris text-center">
+      Sistema de reconocimiento de personas, mediante el rostro y la voz. Revise
+      la documentación aquí:
+      <a
+        target="_blank"
+        rel="noopener"
+        href="https://github.com/JoseJaita/intercorp-reconocimiento"
+        >Source.</a
+      >
+    </p>
+  </div>
+  <div class="mt-5">
+    <form class="example-form">
+      <!-- <h2>Iniciar Sesión</h2> -->
+      <mat-form-field class="example-full-width">
+        <input
+        matInput
+          type="tel"
+          placeholder="Ingrese su DNI"
+          minlength="8"
+          maxlength="8"
+          [formControl]="dniFormControl"
+          [(ngModel)]="dniLogin"
+        />
+        <mat-error
+          *ngIf="
+            dniFormControl.hasError('minlength') &&
+            !dniFormControl.hasError('required')
+          "
+        >
+          Ingrese un DNI valido
+        </mat-error>
+        <mat-error *ngIf="dniFormControl.hasError('required')">
+          DNI es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <!-- <P>dni: {{ dniLogin }}</P> -->
+    <div class="col">
+      <div class="my-3">
+        <button mat-raised-button color="primary" [disabled]="loading" (click)="getService()">
+          <span *ngIf="!loading">Ingresar</span>
+          <span *ngIf="loading">Validando...</span>
+        </button>
+      </div>
+      <div>
+        <button mat-stroked-button color="primary" (click)="onRegister()">
+          Registrarse
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footerMaterial">
+  <div class="d-flex justify-content-end pr-2">
+    <img class="logo" src="assets/everisDemo.png" />
+  </div>
+</div>

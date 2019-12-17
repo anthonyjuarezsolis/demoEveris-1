@@ -1,0 +1,19 @@
+.footerMaterial {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  .logo {
+    width: 140px;
+    height: 70px;
+  }
+}
+
+.titleLogin {
+  color: #9bae04;
+}
+
+button:focus {
+  outline: none;
+}

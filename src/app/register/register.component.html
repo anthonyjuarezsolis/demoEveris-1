@@ -1,0 +1,195 @@
+<div class="container">
+  <h2 class="mt-3 titlePage">Registro</h2>
+  <!-- <webcam></webcam> -->
+  <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{ !isLinear ? "Enable linear mode" : "Disable linear mode" }}
+  </button> -->
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Completa tu DNI</ng-template>
+        <mat-form-field>
+          <input
+            class="mt-2"
+            matInput
+            type="tel"
+            placeholder="Ingrese su DNI"
+            minlength="8"
+            maxlength="8"
+            formControlName="firstCtrl"
+            [(ngModel)]="dniRegister"
+            required
+          />
+          <mat-error *ngIf="firstFormGroup.get('firstCtrl')">
+            Ingrese un DNI valido
+          </mat-error>
+        </mat-form-field>
+
+        <div class="mt-2">
+          <!-- <p>DNI: {{ dniRegister }}</p> -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onOpenCamera()"
+            matStepperNext
+          >
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel
+          >Completa el reconocimiento facial</ng-template
+        >
+        <!-- 360 x 480 -->
+        <!-- <canvas
+          #canvasEl
+          style="position: absolute;
+          z-index: 1; border:2px solid #9bae04;
+          height: 380px;
+          width: 260px;"
+        >
+        </canvas> -->
+        <div class="mt-3" *ngIf="CameraView">
+          <webcam
+            class="webcam"
+            (initError)="handleInitError($event)"
+            [width]="260"
+            [height]="380"
+            [trigger]="triggerObservable"
+            (imageCapture)="handleImage($event)"
+          >
+          </webcam>
+        </div>
+        <div class="pb-3">
+          <button
+            *ngIf="btnCamera"
+            mat-fab
+            color="primary"
+            class="start-button"
+            (click)="onImageToService()"
+          >
+            Iniciar
+          </button>
+          <button
+            *ngIf="!btnCamera"
+            mat-fab
+            color="primary"
+            class="start-button"
+            (click)="onImageToService()"
+          >
+            <p>{{ buttonTimer }}</p>
+          </button>
+        </div>
+        <div>
+          <button
+            class="mr-4"
+            mat-stroked-button
+            color="primary"
+            (click)="onCloseCamera()"
+            matStepperPrevious
+          >
+            Atrás
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCloseCamera()"
+            matStepperNext
+          >
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel
+          >Completa el reconocimiento de voz</ng-template
+        >
+        <div class="mt-2 text-left">
+          <h6>Por favor lea la siguiente frase:</h6>
+          <p>"Hola, soy una persona y me estoy registrando en el nuevo sistema de reconocimiento."</p>
+        </div>
+        <div>
+          <button
+            mat-fab
+            color="primary"
+            class="start-button"
+            *ngIf="!isRecording && !blobUrl"
+            (click)="startRecording()"
+          >
+            Grabar
+          </button>
+          <button
+            mat-fab
+            color="primary"
+            class="stop-button"
+            *ngIf="isRecording && !blobUrl"
+            (click)="stopRecording()"
+          >
+            Detener
+          </button>
+          <button
+            mat-fab
+            color="primary"
+            class="cancel-button"
+            *ngIf="!isRecording && blobUrl"
+            (click)="clearRecordedData()"
+          >
+            Limpiar
+          </button>
+          <div *ngIf="isRecording && !blobUrl" class="titlePage">
+            {{ recordedTime }}
+          </div>
+          <div class="titlePage mt-3">
+            <audio *ngIf="!isRecording && blobUrl" controls>
+              <source [src]="blobUrl" type="audio/webm" />
+            </audio>
+            <p *ngIf="!isRecording && blobUrl">Audio Grabado!</p>
+          </div>
+        </div>
+        <div>
+          <button
+            class="mr-4"
+            mat-stroked-button
+            color="primary"
+            (click)="onOpenCamera()"
+            matStepperPrevious
+          >
+            Atrás
+          </button>
+          <button button mat-raised-button color="primary" matStepperNext>
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finalizar</ng-template>
+      <!-- Ya has terminado. -->
+      <div class="my-4">
+        <button
+          class="mr-4"
+          mat-stroked-button
+          color="primary"
+          matStepperPrevious
+        >
+          Atrás
+        </button>
+        <button mat-stroked-button color="primary" (click)="stepper.reset()">
+          Reiniciar
+        </button>
+      </div>
+      <button mat-raised-button color="primary" [disabled]="loading" (click)="getServiceIntercorp()">
+        <span *ngIf="!loading">Finalizar Registro</span>
+        <span *ngIf="loading">Validando...</span>
+        <!-- <span *ngIf="loading" class="d-flex px-2 my-1">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">cached</mat-icon>
+        </span> -->
+      </button>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

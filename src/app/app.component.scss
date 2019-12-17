@@ -1,0 +1,56 @@
+.index {
+  text-align: center;
+}
+
+.headerEveris {
+  background-color: #9bae04;
+  color: white;
+  box-shadow:
+  0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+  0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+  0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+
+.everis-button {
+  background-color: #9bae04;
+  color: white;
+  margin: 10px;
+}
+
+.camera {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.detail {
+  position: absolute;
+  z-index: 1;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+// .footerEveris {
+//   background-color: #fff;
+//   .footerEveris_row {
+//     justify-content: flex-end !important;
+//     bottom: 0;
+//     width: 100%;
+//   }
+
+// }
+    .footerMaterial {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        .logo {
+          width: 140px;
+          height: 70px;
+        }
+    }
+
+    .descriptionEveris {
+      font-size: 14px;
+    }

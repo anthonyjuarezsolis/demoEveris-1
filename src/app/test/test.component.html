@@ -1,0 +1,55 @@
+<div class="my-2">
+    <!-- <canvas
+      #canvasEl
+      style="position: absolute;
+        z-index: 1; border:2px solid #9bae04;
+        height: 349px;
+        width: 259px;"
+    >
+    </canvas> -->
+    <!-- border:2px solid #9bae04;" -->
+    <canvas
+      #canvasEl
+      style="position: absolute;
+      z-index: 1;"
+      width="640"
+      height="480"
+    >
+    </canvas>
+    <!-- 360 x 480 -->
+    <!-- width="480"
+    height="640"
+    [width]="480"
+    [height]="640" -->
+    <webcam
+      (initError)="handleInitError($event)"
+      [width]="640"
+      [height]="480"
+      [trigger]="triggerObservable"
+      (imageCapture)="handleImage($event)"
+    >
+    </webcam>
+    <!-- <webcam
+    (initError)="handleInitError($event)"
+    [width]="260"
+    [height]="380"
+    [trigger]="triggerObservable"
+    (imageCapture)="handleImage($event)"
+  >
+  </webcam> -->
+    <div class="row col-12" *ngIf="!data">
+      <div class="col-6">
+        <p>Xmin: {{ xmin }}</p>
+        <p>Ymin: {{ ymin }}</p>
+        <p>Xmax: {{ xmax }}</p>
+        <p>Ymax: {{ ymax }}</p>
+      </div>
+
+      <div class="col-6">
+        <p>x: {{ x }}</p>
+        <p>y: {{ y }}</p>
+        <p>h: {{ h }}</p>
+        <p>w: {{ w }}</p>
+      </div>
+    </div>
+  </div>

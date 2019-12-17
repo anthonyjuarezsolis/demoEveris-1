@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h1 class="titleLogin text-center" mat-dialog-title>
+    {{ title }}
+  </h1>
+</div>
+<div class="mx-2">
+  <p>{{ message }}</p>
+  <p>{{ messageTwo }}</p>
+  <p>{{ messageThree}}</p>
+</div>
+
+<div class="pb-3 d-flex justify-content-end" mat-dialog-actions>
+  <!-- <button mat-button (click)="onDismiss()">Cancelar</button> -->
+  <button mat-raised-button color="primary" (click)="onConfirm()">
+    Aceptar
+  </button>
+</div>
