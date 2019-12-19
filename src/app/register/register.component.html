@@ -63,6 +63,9 @@
           >
           </webcam>
         </div>
+        <p class="titlePage m-0" *ngIf="buttonTimer == 0">
+          Rostro Grabado!
+        </p>
         <div class="pb-3">
           <button
             *ngIf="btnCamera"
@@ -111,7 +114,10 @@
         >
         <div class="mt-2 text-left">
           <h6>Por favor lea la siguiente frase:</h6>
-          <p>"Hola, soy una persona y me estoy registrando en el nuevo sistema de reconocimiento."</p>
+          <p>
+            "Hola, soy una persona y me estoy registrando en el nuevo sistema de
+            reconocimiento."
+          </p>
         </div>
         <div>
           <button
@@ -148,7 +154,10 @@
             <audio *ngIf="!isRecording && blobUrl" controls>
               <source [src]="blobUrl" type="audio/webm" />
             </audio>
-            <p *ngIf="!isRecording && blobUrl">Audio Grabado!</p>
+            <p class="m-0" *ngIf="!isRecording && blobUrl">Audio Grabado!</p>
+            <p *ngIf="!isRecording && blobUrl">
+              Puede verificar el audio en el reproductor.
+            </p>
           </div>
         </div>
         <div>
@@ -161,7 +170,13 @@
           >
             Atrás
           </button>
-          <button button mat-raised-button color="primary" matStepperNext>
+          <button
+            button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            (click)="stopRecording()"
+          >
             Siguiente
           </button>
         </div>
@@ -183,7 +198,12 @@
           Reiniciar
         </button>
       </div>
-      <button mat-raised-button color="primary" [disabled]="loading" (click)="getServiceIntercorp()">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="loading"
+        (click)="getServiceIntercorp()"
+      >
         <span *ngIf="!loading">Finalizar Registro</span>
         <span *ngIf="loading">Validando...</span>
         <!-- <span *ngIf="loading" class="d-flex px-2 my-1">

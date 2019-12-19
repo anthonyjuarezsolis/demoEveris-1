@@ -328,9 +328,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getIntercorp().subscribe(
       dataRespuesta => {
         this.dataRespuesta = dataRespuesta;
-        this.scoreImage = "Puntuación del rostro: "+(this.dataRespuesta.score_face * 100).toFixed(2)+"%";
-        this.scoreAudio = "Puntuación de voz: "+(this.dataRespuesta.score_audio * 100).toFixed(2)+"%";
-        this.scoreText =  "Puntuación de texto: "+(this.dataRespuesta.score_text * 100).toFixed(2)+"%";
+        this.scoreImage = "Coincidencia del rostro al "+(this.dataRespuesta.score_face * 100).toFixed(2)+"%";
+        this.scoreAudio = "Coincidencia de voz al "+(this.dataRespuesta.score_audio * 100).toFixed(2)+"%";
+        this.scoreText =  "Coincidencia de texto al "+(this.dataRespuesta.score_text * 100).toFixed(2)+"%";
 
         console.log(this.dataRespuesta);
         if(this.dataRespuesta) {
